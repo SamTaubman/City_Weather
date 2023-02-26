@@ -1,9 +1,9 @@
 import tkinter as tk
 import requests
 import time
+import os
 
-
-API_KEY = "8ebd807426f3e2547b479fa7f4048257"
+API_KEY = os.getenv(‘WEATHER_API_KEY’)
 def getWeather(canvas):
     city = textfield.get()
     api = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
@@ -38,38 +38,41 @@ def getWeather(canvas):
     label6.config(text = sunrise_data)
     label7.config(text = sunset_data)
     
+def main():
+    canvas = tk.Tk()
+    canvas.title("Weather App")
+    canvas.geometry("1000x700")
 
-canvas = tk.Tk()
-canvas.title("Weather App")
-canvas.geometry("1000x700")
+    f = ("Bell MT", 15, "bold")
+    t = ("Bell MT", 35, "bold")
 
-f = ("Bell MT", 15, "bold")
-t = ("Bell MT", 35, "bold")
+    textfield = tk.Entry(canvas, font = t)
+    textfield.pack(pady = 20)
+    textfield.focus()
+    textfield.bind('<Return>', getWeather)
 
-textfield = tk.Entry(canvas, font = t)
-textfield.pack(pady = 20)
-textfield.focus()
-textfield.bind('<Return>', getWeather)
+    label1 = tk.Label(canvas, font = t)
+    label1.pack()
 
-label1 = tk.Label(canvas, font = t)
-label1.pack()
+    label2 = tk.Label(canvas, font = t)
+    label2.pack()
 
-label2 = tk.Label(canvas, font = t)
-label2.pack()
+    label3 = tk.Label(canvas, font = t, fg='red')
+    label3.pack()
 
-label3 = tk.Label(canvas, font = t, fg='red')
-label3.pack()
+    label4 = tk.Label(canvas, font = t, fg='blue')
+    label4.pack()
 
-label4 = tk.Label(canvas, font = t, fg='blue')
-label4.pack()
+    label5 = tk.Label(canvas, font = t)
+    label5.pack()
 
-label5 = tk.Label(canvas, font = t)
-label5.pack()
+    label6 = tk.Label(canvas, font = t, fg='goldenrod2')
+    label6.pack()
 
-label6 = tk.Label(canvas, font = t, fg='goldenrod2')
-label6.pack()
+    label7 = tk.Label(canvas, font = t, fg='firebrick2')
+    label7.pack()
 
-label7 = tk.Label(canvas, font = t, fg='firebrick2')
-label7.pack()
-
-canvas.mainloop()
+    canvas.mainloop()
+    
+if __name__ == "__main__":
+    main()
